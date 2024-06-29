@@ -1,0 +1,60 @@
+{% extends 'layout/layout.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/accueil/accueil.css' %}">
+<style>
+    .lang-link {
+        margin-right: 510px; /* Vous pouvez utiliser des classes CSS pour le positionnement plutôt que des valeurs absolues comme les pixels. */
+        text-decoration: none; 
+        color: #893333; 
+        font-weight: bold; 
+        font-size: 40px; 
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="presentation banniere">
+    <p><b>{% trans "Welcome to Daily Scribble, your destination for discovering and exploring a universe rich in captivating and informative content. Since our humble beginnings, Daily Scribble has been committed to providing a platform where intellectual curiosity is celebrated, and where each article tells a unique story." %}</b></p>
+</div>
+<div class="histoire banniere">
+    <h2>{% trans "Our story" %}</h2>
+    <p>
+        {% trans "Founded with passion and determination, DailyScribble was born from a shared love for writing, sharing knowledge, and digital innovation." %}
+        <br>{% trans "Inspired by the potential of blogs to connect people and inspire dialogue, we launched this site with the vision of becoming an indispensable source of relevant and stimulating information." %}
+    </p>
+</div>
+<div class="vision banniere">
+    <h2>{% trans "Our Vision" %}</h2>
+    <p>
+        {% trans "At DailyScribble, our vision is to become an indispensable reference in the blogging domain by providing diverse and high-quality content that inspires, educates, and enriches our readers. We believe in integrity and authenticity, emphasizing transparency and truth in every article we publish." %}
+    </p>
+</div>
+<h1>{% trans "Our Featured Articles" %}</h1>
+<ul class="articles-container">
+    {% for article in articles %}
+        <li>
+            <h2>{% trans article.title %}</h2>
+            <p>{% trans article.content %}</p>
+            <p><strong>{% trans "Publication Date:" %}</strong> {{ article.publication_date }}</p>
+        </li>
+    {% endfor %}
+</ul>    
+<div class="content">
+    <div class="illustration2">
+        <section class="titre2">
+            <a class="button" href="{% url 'chatbot' %}"><b><i>{% trans "Chatbot" %}</i></b></a>
+        </section>
+        <section class="image">
+            <img src="{% static 'css/yourapp/images/CHATBOT.jpg.png' %}" style="width:150px; height: 130px">
+            <!-- Assurez-vous que le chemin vers l'image est correctement spécifié. -->
+        </section>
+    </div>
+</div>
+
+<a href="/change-language/?lang=en" class="lang-link">{% trans "English" %}</a>
+<a href="/change-language/?lang=fr" class="lang-link">{% trans "French" %}</a>
+
+{% endblock %}
